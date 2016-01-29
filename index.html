@@ -7,37 +7,41 @@
 </head>
 <body>
 <div class="container" style="margin-top:100px;">
-    <div class="row">
+    <div class="row" ng-controller="EmailController">
         <div class="col-xs-5">
-            <form name="emailForm">
+            <form name="emailForm" novalidate="novalidate" ng-submit="sendEmail()">
                 <div class="form-group">
                     <label for="recipient">Recipient's Name</label>
-                    <input type="text" class="form-control" id="recipient" placeholder="Recipient's Name" required="required">
+                    <input ng-model="email.recipient" type="text" class="form-control" name="recipient" id="recipient" placeholder="Recipient's Name" required="required">
+
+                    <div ng-show=   "emailForm.recipient.$error.required" class="error">Please provide sender's name</div>
+                    {{emailForm.recipient.$error.required}}
                 </div>
                 <div class="form-group">
                     <label for="message">Message</label>
-                    <textarea id="message" class="form-control" placeholder="Message"  required="required"></textarea>
+                    <textarea ng-model="email.message" id="message" class="form-control" placeholder="Message"  required="required"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="senderName">Your Name</label>
-                    <input type="text" class="form-control" id="senderName" placeholder="Your Name" required="required">
+                    <input ng-model="email.sender" type="text" class="form-control" id="senderName" placeholder="Your Name" required="required">
 
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary pull-right">Send</button>
+                    <button ng-disabled="!emailForm.$valid" type="submit" class="btn btn-primary pull-right" >Send</button>
                 </div>
             </form>
         </div>
         <div class="col-xs-1"></div>
         <div class="col-xs-6">
             <h2>Letter Preview</h2>
-            <div>Dear <i>recipient's name</i>,</div>
+            <div>Dear <i>{{email.recipient}}</i>,</div>
             <div style="text-indent: 20px;margin-top:25px;">
-                This is a sample message body
+                {{email.message}}
             </div>
             <div style="margin-top: 25px;">
                 Yours Sincerely<br/>
-                <i>Sender's name</i>
+
+                <sean first-name="email.sender"> </sean>
             </div>
         </div>
     </div>

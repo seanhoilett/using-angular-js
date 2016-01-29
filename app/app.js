@@ -7,7 +7,7 @@ angular.module(appName).run(function () {
 });
 
 
-angular.module(appName).controller(['$scope', function($scope){
+angular.module(appName).controller('EmailController', ['$scope', function($scope){
     $scope.email = {
         recipient: '',
         message: '',
@@ -15,7 +15,7 @@ angular.module(appName).controller(['$scope', function($scope){
     };
 
     $scope.sendEmail = function() {
-
+        alert('email sent!')
     };
 
     $scope.saveDraft = function() {
@@ -25,5 +25,15 @@ angular.module(appName).controller(['$scope', function($scope){
     $scope.discard = function() {
         
     }
+}]).directive('sean', function(){
+    return {
+        restrict: 'AE',
+        link: function() {
 
-}]);
+        },
+        scope: {
+          firstName: '='
+        },
+        template: '<span>{{firstName}} Hoilett</span>'
+    }
+});
